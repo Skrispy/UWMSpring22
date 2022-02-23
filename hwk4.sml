@@ -11,13 +11,26 @@ fun is_sorted (nil, _) = true
 (*Question 2*)
 fun selection_sort (nil, _) = nil
 | selection_sort (list, f) =
-    let(*select helper function needs to build new list look at lecture recording*)
-        fun select small ([], output) = small::(selection_sort output, f)
-        | select small (x::rest, output) =
-            if f(x,small) then
-                select x (rest, small::output)
-            else
-                select small (rest,x::output)
-    in
-        select first (list, [])
+    fun findMin [] = []
+    | findMin [a] = (a,[])
+    | findMin (a::rest) =
+    let 
+        val (a',rest') = findMin rest;
+    in 
+        if f(a',a)
+        then a' , a::rest'
+        else a, rest
     end;
+let
+    val (m,list') = findMin list;
+in 
+    m::selection_sort(list,f)
+end;
+
+
+
+
+
+(*Question 3*)
+fun insertion_sort (nil, _) = nil
+|
