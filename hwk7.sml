@@ -16,7 +16,11 @@ datatype value =
  * 1. implement 
  *      toString: exp -> string 
  *)
-
+fun toString (Int x) = "x"
+| toString (Plus e1 e2) = (toString e1) ^ " + " ^ (toString e2)
+| toString (Minus e1 e2) = (toString e1) ^ " - " ^ (toString e2)
+| toString (Times e1 e2) = (toString e1) ^ " * " ^ (toString e2)
+|toString (Div e1 e2) = (toString e1) ^ " / " ^ (toString e2)
 (* 2. implement 
  *       toStringValue: value -> string 
  *)
