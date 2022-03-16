@@ -24,7 +24,7 @@ fun zip3 nil nil nil = nil
 
 (*Question 4*)
 
-Fun unzip3 nil = ([], [], [])
+fun unzip3 nil = ([], [], [])
 | unzip3 (a,b,c)::rest = 
 	let val (l1, l2, l3) = unzip3 rest
 	in (a::l1, b::l2, c::l3) end;
@@ -42,6 +42,6 @@ fun zipWithIndex ([]) = (null, null)
 fun flatten [] = []
 | flatten (a::rest) = a @ flatten rest;
 
-(Question 7*)
+(*Question 7*)
 fun flatten2 [] = []
 | flatten2 ((a,b)::rest) = a::b::flatten2 rest; 

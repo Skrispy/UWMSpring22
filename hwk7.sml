@@ -32,8 +32,19 @@ fun toStringValue (CVal x) = Int.toString(x)
  * you may want to implement the helper function 
  *       lookup: (string * value) list -> string -> value 
  *)
-fun lookup ((x,v)::ctx) y = if x=y then v else lookup ctx y;
-(*
+ (*
+(fun lookup [] y = Error "No such variable."
+| lookup ((x,v)::ctx) y = 
+      if x=y 
+      then v 
+      else lookup ctx y;)
+ *)
+fun lookup ((x,v)::ctx) y =
+                (case(x=y, (length ctx) >= 0) of
+                    (true,true) => v
+                  | (false,true) => lookup ctx y
+                  | (false, false) => (Error "Variable not found"))
+ (*
  * 3. implement the function 
  *       eval: exp -> (string * value) list -> value
  *
@@ -64,15 +75,13 @@ fun eval (Int x) _ = CVal x
                               val (CVal x) = eval e1 ctx
                               val (CVal y) = eval e2 ctx
                             in
-                              if(y = 0) then Error("Division by zero error: ") else
-                              CVal(x div y)
+                              if(y = 0) 
+                              then Error("Division by zero error: ") 
+                              else CVal(x div y)
                             end
-| eval (Var x) ctx =let
-                      val z = lookup ctx x
-                    in
-                      if z = nil then Error("Variable is not found") else
-                      CVal(z)
-                    end
+                            
+| eval (Var x) ctx = lookup ctx x
+
 | eval (Let (x, e1,e2)) ctx = eval e2 ((x,eval e1 ctx)::ctx);
 (* Test Code *)
 
@@ -84,7 +93,7 @@ val t1 = Let("y", Int 10,
                     Times(Var "y", Int 5)));
 
 toStringValue(eval t1 []);
-(*
+
 val t2 = Let("y", Int 10, 
                   Let("z", Plus(Var "x", Var "y"), 
                              Times(Var "y", Int 5)));
@@ -100,4 +109,3 @@ toStringValue(eval t4 []);
 val t5 = Let("x", Plus(Int 10, t3), Plus(Int 0, Int 20));
 toStringValue(eval t5 []);
 
-*)

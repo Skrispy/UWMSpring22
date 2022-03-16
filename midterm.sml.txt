@@ -1,0 +1,100 @@
+
+(* Name :   Samuel Kersebet                  *)
+
+(* Section 1 -- Grammar
+
+
+ Q1
+<Int> ::= [0-9] | ~[0-9]
+
+
+ Q2
+<List> ::= "[" "]" | "[" <Group> "]"
+<Group> ::= <Int> | <Int> "," <Group>
+
+
+ Q3
+<Sus> ::= "nil" | <Int> "::" <Sus>
+
+
+ Q4
+<Tree> ::= "Node(" <Tree> "," <Tree> ")" | <leaf>
+<Leaf> ::= "L" <Int>
+
+
+ Q5
+
+
+ 
+*)
+
+
+
+(* Section 2 -- Short answer
+
+
+
+ Q1
+
+
+
+ Q2
+
+
+
+ Q3
+
+
+
+*)
+
+
+
+(* Section 3 -- Pattern matching *)
+
+
+ (* Q1 *)
+
+
+ (* Q2 *)
+
+
+ (* Q3 *)
+
+
+ (* Q4 *)
+
+
+ (* Q5 *)
+
+
+ (* Q6 *)
+
+
+ (* Q7 *)
+
+
+ (* Q8 *)
+
+
+(* Section 4 -- Higher order functions *)
+
+ (* Q1 *)
+
+
+
+ (* Q2 *)
+
+
+(* Section 5 -- Algebraic datatype *)
+
+ (* Q1 *)
+
+
+
+ (* Q2 *)
+
+
+
+
+
