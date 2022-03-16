@@ -16,20 +16,23 @@ datatype value =
  * 1. implement 
  *      toString: exp -> string 
  *)
-fun toString (Int x) = "x"
-| toString (Plus e1 e2) = (toString e1) ^ " + " ^ (toString e2)
-| toString (Minus e1 e2) = (toString e1) ^ " - " ^ (toString e2)
-| toString (Times e1 e2) = (toString e1) ^ " * " ^ (toString e2)
-|toString (Div e1 e2) = (toString e1) ^ " / " ^ (toString e2)
+fun toString (Int x) = Int.toString x
+| toString (Plus (x, y)) = "(" ^ toString (x) ^ " + " ^ toString (y) ^ ")"
+| toString (Minus (x, y)) = "(" ^ toString (x) ^ " - " ^ toString (y) ^ ")"
+| toString (Times (x, y)) = "(" ^ toString (x) ^ " * " ^ toString (y) ^ ")"
+|toString (Div (x, y)) = "(" ^ toString (x) ^ " / " ^ toString (y) ^ ")"
+|toString (Var x) = x
+|toString (Let (x, e1, e2)) = "let val" ^ x ^ "=" ^ toString(e1)^ "in" ^ toString(e2)^ " end";
 (* 2. implement 
  *       toStringValue: value -> string 
  *)
-   
+fun toStringValue (CVal x) = Int.toString(x)
+| toStringValue (Error x) = x;
 (* 
  * you may want to implement the helper function 
  *       lookup: (string * value) list -> string -> value 
  *)
-
+fun lookup ((x,v)::ctx) y = if x=y then v else lookup ctx y;
 (*
  * 3. implement the function 
  *       eval: exp -> (string * value) list -> value
@@ -38,7 +41,39 @@ fun toString (Int x) = "x"
  * If you use case expressions in pattern matching, remember to wrap the case
  * expressions in paranthesis to avoid parsing errors.
  *)
-
+fun eval (Int x) _ = CVal x
+| eval (Plus (e1, e2)) ctx = let
+                              val (CVal x) = eval e1 ctx
+                              val (CVal y) = eval e2 ctx
+                            in
+                              CVal(x + y)
+                            end
+| eval (Minus (e1, e2)) ctx = let
+                              val (CVal x) = eval e1 ctx
+                              val (CVal y) = eval e2 ctx
+                            in
+                              CVal(x - y)
+                            end
+| eval (Times (e1, e2)) ctx = let
+                              val (CVal x) = eval e1 ctx
+                              val (CVal y) = eval e2 ctx
+                            in
+                              CVal(x * y)
+                            end
+| eval (Div (e1, e2)) ctx = let
+                              val (CVal x) = eval e1 ctx
+                              val (CVal y) = eval e2 ctx
+                            in
+                              if(y = 0) then Error("Division by zero error: ") else
+                              CVal(x div y)
+                            end
+| eval (Var x) ctx =let
+                      val z = lookup ctx x
+                    in
+                      if z = nil then Error("Variable is not found") else
+                      CVal(z)
+                    end
+| eval (Let (x, e1,e2)) ctx = eval e2 ((x,eval e1 ctx)::ctx);
 (* Test Code *)
 
 Control.Print.printDepth := 100;
@@ -49,7 +84,7 @@ val t1 = Let("y", Int 10,
                     Times(Var "y", Int 5)));
 
 toStringValue(eval t1 []);
-
+(*
 val t2 = Let("y", Int 10, 
                   Let("z", Plus(Var "x", Var "y"), 
                              Times(Var "y", Int 5)));
@@ -65,3 +100,4 @@ toStringValue(eval t4 []);
 val t5 = Let("x", Plus(Int 10, t3), Plus(Int 0, Int 20));
 toStringValue(eval t5 []);
 
+*)
