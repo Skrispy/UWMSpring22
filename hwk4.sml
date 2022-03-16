@@ -9,46 +9,40 @@ fun is_sorted (nil, _) = true
     else false;
 
 (*Question 2*)
-fun selection_sort (nil, _) = []
-    | selection_sort (list, f) =
-        let
-            fun select [] = (nil,nil)
-            |select a = (a,[])
-            |select (a::rest) =
-                let 
-                    val (m, rest') = select rest;
-                in 
-                    if f(m,a)
-                    then (m,a::rest')
-                    else (a, rest)
-                end
-
-        val (min ,list') = select list
-        in 
-            min::selection_sort(list,f)
-        end;
-
+fun selectionsort f =
+  fn  [] => []
+  |    (first::last) =>
+    let
+      fun select small ([], output) = small::(selectionsort f output)
+      |   select small (x::xs, output) =
+            if f(x, small) then
+              select x (xs, small::output)
+            else
+              select small (xs, x::output)
+    in
+      select first (last, [])
+    end;
 
 
 
 
 (*Question 3*)
-fun insertion_sort (nil, _) = []
-| insertion_sort (list, f) = 
-        let
-            fun insert ([],x) = [x]
-            | insert (l'::l,x) =
-                if f(x, l') 
-                then l'::insert(x,l)
-                else x::l'::l
+fun insertsort f =
+fn [] => []
+  |  (x::xs) =>
+    let fun insert (x ,[]) = [x]
+          | insert (x , y::ys) =
+              if f(x,y) then x::y::ys
+              else y::insert(x, ys)
+    in 
 
-            val ret = []
-            fun sort (_,nil) = []
-            |sort (sofar,a::list) =
-                insert(sofar,a)
+  let
+    fun sort([], sofar) = sofar
+      | sort (l::ls, sofar) = sort(ls , insert(l, sofar))
 
-            
-        in 
-            sort(ret,list)
-        end;
+  in sort(x::xs, [])
+
+
+  end
+    end;
 

@@ -16,6 +16,11 @@ datatype exp = ...
 16  in
 17   BVal (round x = round y)
 18  end
-19 | eval (If(cond, e1, e2)) =
-        case (eval(cond,ctx)) of
-            val (BVal b) = if b then (eval(e1,ctx) else (eval(e2,ctx));
+19 |eval (If(x, y, z)) ctx = 
+    let
+      val (BVal e1) = eval x ctx
+      val (CVal e2) = eval y ctx
+      val (CVal e3) = eval z ctx
+    in
+      CVal (if e1 then eval(e2 ctx) else eval(e3 ctx))
+    end;
