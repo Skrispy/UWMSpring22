@@ -1,0 +1,74 @@
+{\rtf1\ansi\ansicpg1252\cocoartf2636
+\cocoatextscaling0\cocoaplatform0{\fonttbl\f0\froman\fcharset0 Times-Roman;}
+{\colortbl;\red255\green255\blue255;\red0\green0\blue0;}
+{\*\expandedcolortbl;;\cssrgb\c0\c0\c0;}
+\margl1440\margr1440\vieww11520\viewh8400\viewkind0
+\deftab720
+\pard\pardeftab720\sa240\partightenfactor0
+
+\f0\fs24 \cf0 \expnd0\expndtw0\kerning0
+a) f(n) is theta g(n) because both functions are growing logarithmically. The limit approaches 1/8 when simplified because the logs drop out in the test.\
+b) f(n) is omega g(n) because we can simplify the limit input to n/(2log(n)^2). This limit test approaches infinity because n grows faster than the square of log(n) * 2.\
+c) f(n) is omega g(n) because g(n) can be simplified to n^(2.585) which grows slower than f(n) = n^3 so therefore approaches infinity in our limit test.\
+d)f(n) is O g(n) because g(n) can be simplified into n^2+n by following the sequence fasts. This will grow faster than n*sqrt(n) because n^2 is a higher order polynomial meaning this limit comparison approaches 0.\'a0\
+e) f(n) is O g(n) because we can simplify 3^(n/2) to 1.732^n which will grow faster than 1.6^n so the limit test approaches 0.\'a0\
+\'a0\
+i.\'a0\
+1) n->n/sqrt(b)->...->n/sqrt(b)^k -> 50\
+n<= sqrt(b)^k*50\
+\pard\pardeftab720\sa240\partightenfactor0
+\cf0 {{\NeXTGraphic k%5C%3A%3E%5Cfrac%7B%5Clceil%5Clog_%7B%5Csqrt%7Bb%7D%7Dn%5Crceil%7D%7B50%7D.svg \width640 \height640 \appleattachmentpadding0 \appleembedtype0 \appleaqc
+}¬}\pard\pardeftab720\sa240\partightenfactor0
+\cf0 \
+2) n->n-b->n-2b->...->n-kb -> -10n\
+n-kb <= -10n\
+\pard\pardeftab720\sa240\partightenfactor0
+\cf0 {{\NeXTGraphic k%3E%5Clceil%5Cfrac%7B9n%7D%7Bb%7D%5Crceil.svg \width640 \height640 \appleattachmentpadding0 \appleembedtype0 \appleaqc
+}¬}\pard\pardeftab720\sa240\partightenfactor0
+\cf0 \
+3)n->n*2b->n*2*2b->...->n*2b*k->1000000\
+n*2b*k<1000000\
+\pard\pardeftab720\sa240\partightenfactor0
+\cf0 {{\NeXTGraphic k%5Cle%5Cfrac%7B500000%7D%7Bb%5Ccdot%20n%7D.svg \width640 \height640 \appleattachmentpadding0 \appleembedtype0 \appleaqc
+}¬}\pard\pardeftab720\sa240\partightenfactor0
+\cf0 \
+\'a0\
+ii.\'a0if b=2 vs {{\NeXTGraphic %5Clog_2n.svg \width640 \height640 \appleattachmentpadding0 \appleembedtype0 \appleaqc
+}¬}\
+1)\
+\pard\pardeftab720\sa240\partightenfactor0
+\cf0 {{\NeXTGraphic evaluates%5C%3Ato%5C%3A%5Cfrac%7B%5Clog_2n%7D%7B%5Clog_2%5Csqrt%7B2%7D%5Ccdot50%7D.svg \width640 \height640 \appleattachmentpadding0 \appleembedtype0 \appleaqc
+}¬}\pard\pardeftab720\sa240\partightenfactor0
+\cf0 \
+so {{\NeXTGraphic %5Ctheta%5C%3A%5Clog_2n.svg \width640 \height640 \appleattachmentpadding0 \appleembedtype0 \appleaqc
+}¬}\
+2) evaluates to {{\NeXTGraphic %5Cfrac%7B9n%7D%7B2%7D.svg \width640 \height640 \appleattachmentpadding0 \appleembedtype0 \appleaqc
+}¬}\
+so {{\NeXTGraphic %5COmega%5C%3A%5Clog_2n.svg \width640 \height640 \appleattachmentpadding0 \appleembedtype0 \appleaqc
+}¬}\
+3) evaluates to {{\NeXTGraphic evaluates%5C%3Ato%5C%3A%5Cleft(%5Cfrac%7B250000%7D%7Bn%7D%5Cright).svg \width640 \height640 \appleattachmentpadding0 \appleembedtype0 \appleaqc
+}¬}\
+so {{\NeXTGraphic O%5C%3A%5Clog_2n.svg \width640 \height640 \appleattachmentpadding0 \appleembedtype0 \appleaqc
+}¬}\
+iii. the fasted algorithm would be loop 3 since it is O log n\
+\'a0\
+\'a0a)\
+1) split coins into 3 bags.\
+2) weigh each bag against each other following the given chart.\'a0\
+3) if one bag is uneven it must contain one or both bad coins. repeat steps 1&2 with coins to find if bag has one or two bad coins.\
+if two group are uneven repeat steps one and two. Only one measurement will need to be taken to find bad coins.\
+if all bags are even there are no bad coins.\
+\'a0\
+b)\'a0\
+1) divide coins into 3 groups\
+2) if groups cannot be divided nicely, make a fourth group for left over coins and divide into 3 groups. (%3)\
+3) compare 3 groups of coins to each other following the given chart.\
+if determined one group is lighter than the other two repeat steps 1,2&3 for this bag alone.\
+else if determined two groups are lighter repeat steps 1,2&3 for each bag individually.\
+else if all groups are determined equal weight look into group 4. if one coin return it\'a0\
+\'a0If two coins are even note them a\
+4) if there\'a0\
+\
+\
+\'a0\
+}

@@ -1,0 +1,1 @@
+fun add x = map (fn (a,b) => a+b) x;
